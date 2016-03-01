@@ -97,8 +97,14 @@
              $GLOBALS['DB']->exec("INSERT INTO courses_students (student_id, course_id) VALUES ({$this->getId()}, {$course->getId()});");
          }
 
+
+
+
          public function getCourses() {
-             $returned_courses = $GLOBALS['DB']->query("SELECT courses.* FROM students JOIN courses_students ON (students.id = courses_students.student_id) JOIN courses ON (courses_students.course_id = courses.id) WHERE students.id = {$this->getId()};");
+             $returned_courses = $GLOBALS['DB']->query("SELECT courses.* FROM students
+                 JOIN courses_students ON (students.id = courses_students.student_id)
+                 JOIN courses ON (courses_students.course_id = courses.id)
+                 WHERE students.id = {$this->getId()};");
             //  $returned_courses = $query->fetchAll(PDO::FETCH_ASSOC);
              $courses = array();
 
