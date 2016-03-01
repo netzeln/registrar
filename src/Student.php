@@ -54,6 +54,7 @@
          static function deleteAll(){
              $GLOBALS['DB']->exec("DELETE FROM students;");
 
+
          }
 
          static function find($search_id) {
@@ -70,6 +71,7 @@
 
          public function delete() {
              $GLOBALS['DB']->exec("DELETE FROM students WHERE id = {$this->getId()};");
+             $GLOBALS['DB']->exec("DELETE FROM courses_students WHERE student_id = {$this->getId()};");
          }
 
          public function update($new_name, $new_enrollment){

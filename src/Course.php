@@ -70,6 +70,7 @@
 
          public function delete() {
              $GLOBALS['DB']->exec("DELETE FROM courses WHERE id = {$this->getId()};");
+             $GLOBALS['DB']->exec("DELETE FROM courses_students WHERE course_id = {$this->getId()};");
          }
 
          public function update($new_course_name, $new_course_number){
