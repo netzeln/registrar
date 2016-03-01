@@ -75,7 +75,7 @@
 
             //Assert;
 
-            $this->assertEquals([$test_course], $result);
+            $this->assertEquals($test_course, $result[0]);
         }
 
         function testGetAll() {
@@ -142,6 +142,43 @@
 
             //Assert;
             $this->assertEquals($test_course, $result);
+        }
+        function testUpdateMem(){
+            //Arrange;
+            $course_name = "American History";
+            $course_number = "HIST101";
+            $id = 1;
+            $test_course = new Course($course_name, $course_number, $id);
+            $test_course->save();
+
+            $new_course_name = "American History: Sons of Liberty";
+            $new_course_number = "HIST102";
+
+            //act
+            $test_course->update($new_course_name, $new_course_number);
+
+            //assert
+            $this->assertEquals($new_course_name, $test_course->getCourseName());
+            $this->assertEquals($new_course_number, $test_course->getCourseNumber());
+        }
+        function testUpdateDB(){
+            //Arrange;
+            $course_name = "American History";
+            $course_number = "HIST101";
+            $id = 1;
+            $test_course = new Course($course_name, $course_number, $id);
+            $test_course->save();
+
+            $new_course_name = "American History: Sons of Liberty";
+            $new_course_number = "HIST102";
+
+            //act
+            $test_course->update($new_course_name, $new_course_number);
+            $result = Course::getAll();
+            
+            //assert
+            $this->assertEquals($new_course_name, $result[0]->getCourseName());
+            $this->assertEquals($new_course_number, $result[0]->getCourseNumber());
         }
     }
  ?>

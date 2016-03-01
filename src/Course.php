@@ -55,7 +55,8 @@
              $GLOBALS['DB']->exec("DELETE FROM courses;");
 
          }
-         static function find($search_id){
+
+         static function find($search_id) {
              $courses = Course::getAll();
              $found_course = null;
              foreach($courses as $course){
@@ -67,6 +68,14 @@
              return $found_course;
          }
 
+         public function delete() {
+             $GLOBALS['DB']->exec("DELETE FROM courses WHERE id = {$this->getId()};");
+         }
 
+         public function update($new_course_name, $new_course_number){
+             $GLOBALS['DB']->exec("UPDATE courses SET course_name = '{$new_course_name}', course_number = '{$new_course_number}' WHERE id = {$this->getId()};");
+             $this->setCourseName($new_course_name);
+             $this->setCourseNumber($new_course_number);
+         }
 
 } ?>
