@@ -7,6 +7,7 @@
     */
 
     require_once "src/Course.php";
+    require_once "src/Student.php";
 
     //if using database
     $server = 'mysql:host=localhost;dbname=registrar_test';
@@ -20,6 +21,7 @@
 
         function teardown() {
             Course::deleteAll();
+            Student::deleteAll();
         }
 
         function testGetCourseName() {

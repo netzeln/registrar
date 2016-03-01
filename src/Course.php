@@ -84,7 +84,7 @@
              foreach ($courses as $course) {
                  $course_name = $course->getCourseName();
                  similar_text($search_term, $course_name, $percentage);
-                 if ($percentage > 50) {
+                 if ($percentage > 35) {
                      array_push($found_courses, $course);
                  }
              }
