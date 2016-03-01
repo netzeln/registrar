@@ -78,4 +78,17 @@
              $this->setCourseNumber($new_course_number);
          }
 
+         static function search($search_term) {
+             $found_courses = array();
+             $courses = Course::getAll();
+             foreach ($courses as $course) {
+                 $course_name = $course->getCourseName();
+                 similar_text($search_term, $course_name, $percentage);
+                 if ($percentage > 50) {
+                     array_push($found_courses, $course);
+                 }
+             }
+             return $found_courses;
+         }
+
 } ?>

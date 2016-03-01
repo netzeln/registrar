@@ -175,10 +175,33 @@
             //act
             $test_course->update($new_course_name, $new_course_number);
             $result = Course::getAll();
-            
+
             //assert
             $this->assertEquals($new_course_name, $result[0]->getCourseName());
             $this->assertEquals($new_course_number, $result[0]->getCourseNumber());
+        }
+
+        function testSearchByName() {
+            //Arrange;
+            $course_name = "American History";
+            $course_number = "HIST101";
+            $id = 1;
+            $test_course = new Course($course_name, $course_number, $id);
+            $test_course->save();
+
+            $course_name2 = "";
+            $course_number2 = "AFHIST101";
+            $id2 = 2;
+            $test_course2 = new Course($course_name2, $course_number2, $id2);
+            $test_course2->save();
+
+            //Act;
+            $search_term = 'American';
+            $result = Course::search($search_term);
+
+            //Assert;
+            $this->assertEquals([$test_course], $result);
+
         }
     }
  ?>
