@@ -38,8 +38,23 @@
         }
 
         static function getAll(){
-            
-        }
+            $returned_courses = $GLOBALS['DB']->query("SELECT * FROM courses;");
+            $courses = array();
+
+            foreach($returned_courses as $course)
+            {$course_name = $course['course_name'];
+             $course_number = $course['course_number'];
+             $id = $course['id'];
+             $new_course = new Course($course_name, $course_number, $id);
+             array_push($courses, $new_course);
+            }
+            return $courses;
+         }
+
+         static function deleteAll(){
+             $GLOBALS['DB']->exec("DELETE FROM courses;");
+             
+         }
 
 
 

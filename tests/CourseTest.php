@@ -19,7 +19,7 @@
     class  CourseTest  extends PHPUnit_Framework_TestCase {
 
         function teardown() {
-
+            Course::deleteAll();
         }
 
         function testGetCourseName() {
@@ -78,5 +78,48 @@
             $this->assertEquals([$test_course], $result);
         }
 
+        function testGetAll() {
+            //Arrange;
+            $course_name = "American History";
+            $course_number = "HIST101";
+            $id = 1;
+            $test_course = new Course($course_name, $course_number, $id);
+            $test_course->save();
+
+            $course_name2 = "African American History";
+            $course_number2 = "HIST102";
+            $id2 = 2;
+            $test_course2 = new Course($course_name2, $course_number2, $id2);
+            $test_course2->save();
+            //Act;
+
+            $result = Course::getAll();
+
+            //Assert;
+
+            $this->assertEquals([$test_course, $test_course2], $result);
+        }
+        function testDeleteAll() {
+            //Arrange;
+            $course_name = "American History";
+            $course_number = "HIST101";
+            $id = 1;
+            $test_course = new Course($course_name, $course_number, $id);
+            $test_course->save();
+
+            $course_name2 = "African American History";
+            $course_number2 = "HIST102";
+            $id2 = 2;
+            $test_course2 = new Course($course_name2, $course_number2, $id2);
+            $test_course2->save();
+            //Act;
+
+            Course::deleteAll();
+            $result = Course::getAll();
+
+            //Assert;
+
+            $this->assertEquals([], $result);
+        }
     }
  ?>
