@@ -17,7 +17,7 @@
                     <h3>All Students</h3>
                     <ul>
                         {% for student in all_students%}
-                            <li>{{ student.getName }}</li>
+                            <li><a href="/student/{{ student.getId }}">{{ student.getName }}</a></li>
                         {% endfor %}
                     </ul>
                     <form  action="/delete_students" method="post">

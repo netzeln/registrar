@@ -12,6 +12,9 @@
     $password = 'root';
     $DB = new PDO($server, $username, $password);
 
+    use Symfony\Component\HttpFoundation\Request;
+    Request::enableHttpMethodParameterOverride();
+
     $app->register(new Silex\Provider\TwigServiceProvider(), array('twig.path'=>__DIR__."/../views"
     ));
 
@@ -21,6 +24,20 @@
 
     $app->get("/students", function() use ($app){
         return $app['twig']->render('students.html.twig', array("all_students"=>Student::getAll()));
+    });
+
+    $app->get("/student/{id}", function($id) use ($app) {
+        $student = Student::find($id);
+        return $app['twig']->render('student.html.twig', array('student' => $student));
+    });
+
+    $app->patch("/student_update", function() use($app) {
+        $student = Student::find($_POST['student_id']);
+        $new_name = $_POST['updated_name'];
+        $new_enrollment = $_POST['updated_enrollment'];
+        $student->update($new_name, $new_enrollment);
+        var_dump($student);
+        return $app['twig']->render('student.html.twig', array('student' => $student));
     });
 
     $app->post("/add_student", function() use ($app){
