@@ -121,5 +121,27 @@
 
             $this->assertEquals([], $result);
         }
+
+        function testFind() {
+            //Arrange;
+            $course_name = "American History";
+            $course_number = "HIST101";
+            $id = 1;
+            $test_course = new Course($course_name, $course_number, $id);
+            $test_course->save();
+
+            $course_name2 = "African American History";
+            $course_number2 = "HIST102";
+            $id2 = 2;
+            $test_course2 = new Course($course_name2, $course_number2, $id2);
+            $test_course2->save();
+
+            //Act;
+            $search_id = $test_course->getId();
+            $result = Course::find($search_id);
+
+            //Assert;
+            $this->assertEquals($test_course, $result);
+        }
     }
  ?>
