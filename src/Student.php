@@ -91,4 +91,26 @@
              return $found_students;
          }
 
-} ?>
+         public function addCourse($course) {
+             $GLOBALS['DB']->exec("INSERT INTO courses_students (student_id, course_id) VALUES ({$this->getId()}, {$course->getId()});");
+         }
+
+         public function getCourses() {
+             $query = $GLOBALS['DB']->query("SELECT course_id FROM courses_students WHERE student_id = {$this->getId()};");
+             $course_ids = $query->fetchAll(PDO::FETCH_ASSOC);
+             $courses = array();
+
+             foreach ($course_ids as $id) {
+                 $course_id = $id['course_id'];
+                 $result = $GLOBALS['DB']->query("SELECT * FROM courses WHERE id = {$course_id};");
+                 $returned_course = $result->fetchAll(PDO::FETCH_ASSOC);
+                 $id = $returned_course[0]['id'];
+                 $course_name = $returned_course[0]['course_name'];
+                 $course_number = $returned_course[0]['course_number'];
+                 $course = new Course($course_name, $course_number, $id);
+                 array_push($courses, $course);
+             }
+             return $courses;
+         }
+     }
+?>
