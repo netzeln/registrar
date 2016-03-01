@@ -36,6 +36,19 @@
       return $app['twig']->render('students.html.twig', array("all_students"=>Student::getAll()));
     });
 
+    $app->get("/courses", function() use ($app){
+        return $app['twig']->render('courses.html.twig', array("all_courses"=>Course::getAll()));
+    });
+
+    $app->post("/add_course", function() use ($app){
+        $new_course = new Course($_POST['course_name'], $_POST['course_number']);
+        $new_course->save();
+      return $app['twig']->render('courses.html.twig', array("all_courses"=>Course::getAll()));
+    });
+    $app->post("/delete_courses", function() use ($app) {
+        Course::deleteAll();
+      return $app['twig']->render('courses.html.twig', array("all_courses"=>Course::getAll()));
+    });
 
     return $app;
  ?>

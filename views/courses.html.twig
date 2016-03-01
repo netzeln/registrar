@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    {% include 'header.html' %}
+    <body>
+        <div class="container">
+            <h1>Registrar's Office</h1>
+            <h2>Add Course</h2>
+            <form action="/add_course" method="post">
+                <label for="course_name">Course Name:</label>
+                <input type="text" name="course_name">
+                <label for="course_number">Course Number:</label>
+                <input type="text" name="course_number">
+
+                <button type="submit" class="btn btn-info">Add Course</button>
+            </form>
+                {% if all_courses is not empty%}
+                    <h3>All Courses</h3>
+                    <ul>
+                        {% for course in all_courses %}
+                            <li>{{ course.getCourseName }}</li>
+                        {% endfor %}
+                    </ul>
+                    <form  action="/delete_courses" method="post">
+                        <button type="submit" class="btn btn-danger" name="button">Scrap the Whole Curriculum</button>
+                    </form>
+                {% endif %}
+
+
+        </div>
+
+    </body>
+</html>
