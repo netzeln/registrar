@@ -36,12 +36,18 @@
              {% if courses is not empty%}
                 <ul>
                     {% for course in courses %}
-                        <li> <strong>{{course.getCourseNumber}}</strong>: {{course.getCourseName}}</li>
+                        <li> <strong>{{course.getCourseNumber}}</strong>: {{course.getCourseName}} --
+                            <form action="/drop_course" method="post">
+                                <input type="hidden" name="_method" value="delete">
+                                <input type="hidden" name="course" value="{{course.getId}}">
+                                <button type="submit" class="btn btn-sm">DROP?</button>
+                            </form>
+                            </li>
                     {% endfor %}
                 <ul>
              {% endif %}
 
-             
+
             <a href="/"><button type="button" name="button">Back to Home</a></button>
             <a href="/students"><button type="button" name="button">Back to Students</a></button>
         </div>

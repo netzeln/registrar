@@ -58,7 +58,10 @@
         $old_student->delete();
       return $app['twig']->render('students.html.twig', array("all_students"=>Student::getAll()));
     });
-
+    // $app->delete("/drop_course", function($id) use ($app){
+    //
+    //   return $app['twig']->render('students.html.twig', array("all_students"=>Student::getAll()));
+    // });
 //COURSES stuff
     $app->get("/courses", function() use ($app){
         return $app['twig']->render('courses.html.twig', array("all_courses"=>Course::getAll()));
