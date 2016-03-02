@@ -17,7 +17,7 @@
                     <h3>All Courses</h3>
                     <ul>
                         {% for course in all_courses %}
-                            <li>{{ course.getCourseName }}</li>
+                            <li><a href="/course/{{course.getId}}">{{ course.getCourseName }}</a></li>
                         {% endfor %}
                     </ul>
                     <form  action="/delete_courses" method="post">
@@ -25,7 +25,8 @@
                     </form>
                 {% endif %}
 
-
+            <a href="/"><button type="button" name="button">Back to Home</a></button>
+            <a href="/"><button type="button" name="button">Back to Courses</a></button>
         </div>
 
     </body>

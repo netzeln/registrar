@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    {% include 'header.html' %}
+    <body>
+        <div class="container">
+            <h1>Registrar's Office</h1>
+            <h2>{{course.getCourseName}}</h2>
+            <p>
+                 {{course.getCourseNumber}}
+            </p>
+            <h3>Courses:</h3>
+
+            <form action="/course_update" method="post">
+                <input type="hidden" name="course_id" value="{{ course.getId }}">
+                <input type="hidden" name="_method" value="patch">
+                <div class="form-group">
+                    <label for="updated_name">Change Course Name:</label>
+                    <input id="updated_name" name="updated_name" class="form-select" type="text" value="{{ course.getCourseName }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="updated_course_number">Change Course Number:</label>
+                    <input id="updated_course_number" name="updated_course_number" class="form-select" type="text" value="{{ course.getCourseNumber }}">
+                </div>
+
+
+
+                <button class="btn btn-primary" type="submit">Update!</button>
+            </form>
+
+            {% if enrolled_students is not empty %}
+                <ul>
+                    {% for enrollee in enrolled_students %}
+                    <li>{{enrollee.getName}}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <form  action="/enroll_student" method="post">
+
+                <input type="hidden" name="course_id" value="{{ course.getId }}">
+                <select  name="student_id" multiple class="form-control" type="number" required>
+                   {% for student in all_students %}
+                       <option value="{{student.getId}}">{{student.getName}}</option>
+                    {% endfor %}
+                </select>
+                <button class="btn btn-info" type="submit">Add a Student</button>
+            </form>
+            <a href="/"><button type="button" name="button">Back to Home</a></button>
+            <a href="/courses"><button type="button" name="button">Back to Courses</a></button>
+        </div>
+
+    </body>
+</html>

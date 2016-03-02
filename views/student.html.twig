@@ -8,7 +8,7 @@
             <p>
                 Enrolled: {{student.getEnrollment}}
             </p>
-            <h3>Courses:</h3>
+
 
             <form action="/student_update" method="post">
                 <input type="hidden" name="student_id" value="{{ student.getId() }}">
@@ -27,6 +27,23 @@
 
                 <button class="btn btn-primary" type="submit">Update!</button>
             </form>
+            <form  action="/delete_student/{{student.getId}}" method="post">
+                <input type="hidden" name="_method" value="delete">
+                <button type="submit" class="btn btn-danger" name="button">Delete This Student</button>
+            </form>
+
+            <h3>Courses:</h3>
+             {% if courses is not empty%}
+                <ul>
+                    {% for course in courses %}
+                        <li> <strong>{{course.getCourseNumber}}</strong>: {{course.getCourseName}}</li>
+                    {% endfor %}
+                <ul>
+             {% endif %}
+
+             
+            <a href="/"><button type="button" name="button">Back to Home</a></button>
+            <a href="/students"><button type="button" name="button">Back to Students</a></button>
         </div>
 
     </body>
