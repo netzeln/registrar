@@ -39,7 +39,7 @@
             <form  action="/enroll_student" method="post">
 
                 <input type="hidden" name="course_id" value="{{ course.getId }}">
-                <select  name="student_id" multiple class="form-control" type="number" required>
+                <select  name="student" multiple class="form-control" type="number" required>
                    {% for student in all_students %}
                        <option value="{{student.getId}}">{{student.getName}}</option>
                     {% endfor %}

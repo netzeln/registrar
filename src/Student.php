@@ -118,5 +118,10 @@
              }
              return $courses;
          }
+
+         public function dropCourse($course) {
+             $GLOBALS['DB']->exec("DELETE FROM courses_students WHERE course_id = {$course->getId()} AND student_id = {$this->getId()};");
+
+         }
      }
 ?>
